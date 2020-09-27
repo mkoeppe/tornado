@@ -26,7 +26,6 @@ class except to start a server at the beginning of the process
 """
 
 import socket
-import ssl
 
 from tornado.escape import native_str
 from tornado.http1connection import HTTP1ServerConnection, HTTP1ConnectionParameters
@@ -41,6 +40,7 @@ from typing import Union, Any, Dict, Callable, List, Type, Tuple, Optional, Awai
 
 if typing.TYPE_CHECKING:
     from typing import Set  # noqa: F401
+    import ssl
 
 
 class HTTPServer(TCPServer, Configurable, httputil.HTTPServerConnectionDelegate):
@@ -157,7 +157,7 @@ class HTTPServer(TCPServer, Configurable, httputil.HTTPServerConnectionDelegate)
         ],
         no_keep_alive: bool = False,
         xheaders: bool = False,
-        ssl_options: Union[Dict[str, Any], ssl.SSLContext] = None,
+        ssl_options: Union[Dict[str, Any], 'ssl.SSLContext'] = None,
         protocol: str = None,
         decompress_request: bool = False,
         chunk_size: int = None,
